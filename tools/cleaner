@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. $(dirname $0)/common
+
+rm -f $TARGET_DIR/*.{md,xhtml,epub,mobi}
+

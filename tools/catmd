@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# PAGES_DIR/ 以下にある *.md ファイルを
+# maliq が認識できる形によしなに結合して OUT_MARKDOWN に保存する。
+#
+# $ ./tools/catmd
+#
+
+. $(dirname $0)/common
+
+# Definitions
+
+    readonly PAGES_DIR=${CURRENT_DIR}/../pages
+    readonly SEP_TEMPLATE="<<<--- %s --->>>"
+
+# Main Routine
+
+    # concat Yaml Front Matter(YFM) and first page
+
+    declare -a PAGES=(`ls ${PAGES_DIR}/*.md`)
+    OUT_MARKDOWN="${TARGET_DIR}"/$(basename ${PAGES[0]})
+    cat $PAGES_DIR/*.yml ${PAGES[0]} > $OUT_MARKDOWN
+    unset PAGES[0]
+
+    # concat remain pages
+
+    for md in "${PAGES[@]}"
+    do
+        SEP=$(printf "${SEP_TEMPLATE}" "$(basename ${md%.md})")
+        echo "${SEP}" | cat - $md >> $OUT_MARKDOWN
+    done
+

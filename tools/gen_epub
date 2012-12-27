@@ -1,0 +1,9 @@
+#!/bin/bash
+
+. $(dirname $0)/common
+
+${CURRENT_DIR}/cleaner
+${CURRENT_DIR}/catmd
+
+maliq $TARGET_DIR/*.md
+$(cd $TARGET_DIR ; maliq_gepub)

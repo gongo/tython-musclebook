@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+CURRENT_DIR=$(cd $(dirname $0) ; pwd)
+TARGET_DIR=${CURRENT_DIR}/../build
